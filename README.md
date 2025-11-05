@@ -1,132 +1,101 @@
-# 🧪 Rest Assured API Testing Practice
+  # 🚀 ITI Graduation API Automation Project
 
-This repository contains my practice work using **Rest Assured** for API automation testing and **POJOs (Plain Old Java Objects)** for handling request and response data models.  
+  ![Java](https://img.shields.io/badge/Language-Java-blue?logo=java)
+  ![Maven](https://img.shields.io/badge/Build-Maven-orange?logo=apache-maven)
+  ![TestNG](https://img.shields.io/badge/TestNG-Framework-yellow?logo=testng)
 
----
+  Automated API Testing Framework built using **Java**, **RestAssured**, **TestNG**, and **Maven**.  
+  This project was created as part of the **ITI Graduation Project** to validate API endpoints for a booking system.
 
-## 🚀 Project Overview
+  ---
 
-The goal of this project is to learn and demonstrate:
-- How to automate RESTful APIs using **Rest Assured**.
-- How to structure API tests cleanly using **TestNG**.
-- How to use **POJO classes** to map JSON requests and responses.
-- How to separate API logic, data models, and test cases for better maintainability.
+  ## 🧩 Tech Stack
+  - **Language:** Java  
+  - **Build Tool:** Maven  
+  - **Testing Framework:** TestNG  
+  - **API Testing:** RestAssured  
 
----
+  ---
 
-## 🧰 Tech Stack
+  ## 📂 Project Structure
+  ```plaintext
+  ITI-GRADUATION-API-AUTOMATION/
+  ├── src/
+  │   ├── main/java/
+  │   │   ├── pojo/                  # POJO classes (Request/Response models)
+  │   │   │   ├── BookingPojo.java
+  │   │   │   ├── CreateTokenPojo.java
+  │   │   │   └── GetAllIdsPojo.java
+  │   │   └── resources/             # Config files (config.properties, log4j2.xml)
+  │   │
+  │   └── test/java/
+  │       ├── org/example/
+  │       │   ├── apis/              # API request classes
+  │       │   │   ├── CreateBooking.java
+  │       │   │   ├── CreateToken.java
+  │       │   │   ├── GetAllIds.java
+  │       │   │   ├── TokenApi.java
+  │       │   │   └── UpdateBooking.java
+  │       │   │
+  │       │   ├── base/              # Base setup and API initialization
+  │       │   │   └── BaseApi.java
+  │       │   │
+  │       │   └── tests/             # Test cases (unit/integration/e2e)
+  │       │       ├── AddAndUpdate.java
+  │       │       ├── AddBookingTest.java
+  │       │       ├── BaseTest.java
+  │       │       ├── EndToEndFlow.java
+  │       │       └── UpdateBookingTest.java
+  │
+  ├── pom.xml                        # Maven dependencies
+  └── testng.xml                     # TestNG suite configuration
+```
 
-| Tool | Purpose |
-|------|----------|
-| **Java 11+** | Programming language |
-| **Rest Assured** | API testing library |
-| **TestNG** | Test framework for organizing and executing tests |
-| **Maven** | Build automation and dependency management |
-| **JSON** | Data format for requests and responses |
-
----
-
-## 🗂️ Project Structure
-
-src
-└── test
-└── java
-├── org.example.apis # API call classes (CreateBooking, UpdateBooking, etc.)
-├── org.example.tests # Test classes (AddAndUpdate, CreateBookingTest, etc.)
-└── pojo # POJO classes (BookingPojo, CreateTokenPojo, etc.)
+⚙️ How_to_Run_Tests:
+  - Using_Maven: "mvn clean test"
 
 
+🔧 Configuration:
 
-- **APIs folder** → contains reusable classes for making HTTP requests (POST, PUT, GET).
-- **POJOs folder** → contains data model classes used for serialization/deserialization.
-- **Tests folder** → contains TestNG test classes for verifying API responses.
-
----
-
-## 🧠 Key Concepts Practiced
-
-- Creating and updating bookings using **Rest Assured**.
+  description: "You can store environment variables and base URLs inside config.properties"
   
-- Generating **tokens** for authentication.
+  file_path: "src/main/resources/config.properties"
   
-- Validating response **status codes**, **headers**, and **JSON body**.
+  example:
   
-- Handling dynamic data using **Java Random**.
+    base.url: "https://restful-booker.herokuapp.com"
+    
+    username: "admin"
+    
+    password: "password123"
+
+🧠 Test_Scenarios_Covered:
+  - test_class: "AddBookingTest.java"
+    
+    description: "Validate creating a new booking"
+  - test_class: "UpdateBookingTest.java"
+    
+    description: "Validate updating existing booking"
+  - test_class: "EndToEndFlow.java"
+    
+    description: "Complete flow: Create → Update → Get"
+  - test_class: "CreateToken.java"
+    
+    description: "Generate auth token"
   
-- Designing clean test structure by separating:
+  - test_class: "GetAllIds.java"
+    
+    description: "Retrieve all booking IDs"
+
+👨‍💻 Author:
+
+  name: Mahmoud Mesalem
   
-  - API layer
-    
-  - Data (POJO)
-    
-  - Tests
+  title: Software Testing Engineer
+  
+  linkedin: https://www.linkedin.com/in/mahmoud--mesalem
 
----
+🏁 Summary: |
 
-## ⚙️ How to Run the Tests
-
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/<your-username>/<your-repo-name>.git
-Open in your IDE (IntelliJ IDEA / Eclipse)
-
-Install dependencies
-
-mvn clean install
-
-Run the tests
-
-
-mvn test
-
-or directly from the IDE using TestNG runner.
-
-🧾 Example API Used
-
-The project interacts with the public API:
-
-👉 Restful Booker
-
-Example endpoints:
-
-POST /booking
-
-GET /booking/{id}
-
-PUT /booking/{id}
-
-📸 Sample Test Example
-
-
-@Test
-
-public void testCreateBooking() {
-
-    BookingPojo.BookingDates dates = new BookingPojo.BookingDates("2024-01-01", "2024-01-05");
-    
-    BookingPojo booking = new BookingPojo("Jim", "Brown", 111, true, dates, "Breakfast");
-    
-    Response response = CreateBooking.createBooking(booking);
-    
-    Assert.assertEquals(response.getStatusCode(), 200);
-}
-
-🧑‍💻 Author
-
-Mahmoud Mesalem
-
-📍 Software QA Engineer | API & Automation Enthusiast
-
-📧 mahmoudmesalem23@gmail.com
-
-🌐 https://github.com/3bsatar
-
-⭐ Future Improvements
-
-Add JSON Schema validation.
-
-Integrate with CI/CD (e.g., GitHub Actions).
-
-Add data-driven tests using external files (Excel or JSON).
-
-Include reporting (Allure / Extent Reports).
+  This project demonstrates end-to-end API test automation using clean code design
+  and modular structure, focusing on maintainability, reusability, and reporting excellence.
