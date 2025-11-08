@@ -48,54 +48,49 @@
   │       │       └── UpdateBookingTest.java
   │
   ├── pom.xml                        # Maven dependencies
-  └── testng.xml                     # TestNG suite configuration
 ```
 
-⚙️ How_to_Run_Tests:
-  - Using_Maven: "mvn clean test"
+  ## ▶️ Running Tests
+  You can execute the tests using Maven:
+
+  ```bash
+  # Run all tests
+  mvn clean test
+
+  # Run a specific TestNG class (single test case)
+  mvn clean test -Dtest=ClassName
+  ```
+## 🔧 Configuration
+Store environment variables and base URLs inside `config.properties`:
+
+```properties
+base.url = "https://restful-booker.herokuapp.com"
+username = "admin"
+password = "password123"
+```
+## 🧠 Test Scenarios Covered
+
+| Test Class           | Description                       |
+|---------------------|-----------------------------------|
+| AddBookingTest.java  | Validate creating a new booking   |
+| UpdateBookingTest.java | Validate updating existing booking |
+| EndToEndFlow.java    | Complete flow: Create → Update → Get |
+| CreateToken.java     | Generate authentication token      |
+| GetAllIds.java       | Retrieve all booking IDs           |
 
 
-🔧 Configuration:
 
-  description: "You can store environment variables and base URLs inside config.properties"
-  
-  file_path: "src/main/resources/config.properties"
-  
-  example:
-  
-    base.url: "https://restful-booker.herokuapp.com"
-    
-    username: "admin"
-    
-    password: "password123"
+  ## 👤 Author
+  **Mahmoud Mesalem**
 
-🧠 Test_Scenarios_Covered:
-  - test_class: "AddBookingTest.java"
-    
-    description: "Validate creating a new booking"
-  - test_class: "UpdateBookingTest.java"
-    
-    description: "Validate updating existing booking"
-  - test_class: "EndToEndFlow.java"
-    
-    description: "Complete flow: Create → Update → Get"
-  - test_class: "CreateToken.java"
-    
-    description: "Generate auth token"
-  
-  - test_class: "GetAllIds.java"
-    
-    description: "Retrieve all booking IDs"
+  - [LinkedIn](https://www.linkedin.com/in/mahmoud--mesalem)
+  - [GitHub](https://github.com/3bsatar)
 
-👨‍💻 Author:
+  ## 🤝 Collaboration
+  This repository is maintained by the author.  
+  You are welcome to **fork** the project, experiment freely, and explore the code.  
+  It's a great way to learn, test ideas, and get hands-on experience!  
 
-  name: Mahmoud Mesalem
-  
-  title: Software Testing Engineer
-  
-  linkedin: https://www.linkedin.com/in/mahmoud--mesalem
-
-🏁 Summary: |
-
-  This project demonstrates end-to-end API test automation using clean code design
-  and modular structure, focusing on maintainability, reusability, and reporting excellence.
+  ![Fork](https://img.shields.io/badge/Fork-blue?style=for-the-badge) 
+  ![Experiment](https://img.shields.io/badge/Experiment-brightgreen?style=for-the-badge) 
+  ![Learn](https://img.shields.io/badge/Learn-orange?style=for-the-badge)
