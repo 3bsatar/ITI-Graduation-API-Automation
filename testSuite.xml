@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="BookingAPISuite" verbose="1" parallel="false">
+
+    <test name="BookingAPITests">
+        <classes>
+            <class name="org.example.tests.AddBookingTest"/>
+            <class name="org.example.tests.GetBookingTest"/>
+            <class name="org.example.tests.UpdateBookingTest"/>
+            <class name="org.example.tests.DeleteBookingTest"/>
+        </classes>
+    </test>
+
+</suite>

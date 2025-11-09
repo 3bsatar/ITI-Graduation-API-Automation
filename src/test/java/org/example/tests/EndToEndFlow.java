@@ -1,49 +1,24 @@
 package org.example.tests;
 
-import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.example.apis.CreateToken;
-import org.example.base.BaseApi;
+import org.example.apis.BookingApi;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pojo.BookingPojo;
-import pojo.CreateTokenPojo;
 import pojo.GetAllIdsPojo;
 
 import static io.restassured.RestAssured.given;
 
-public class EndToEndFlow {
-
-    private final CreateToken createTokenApi = new CreateToken();
-    private final String baseUrl = "https://restful-booker.herokuapp.com";
+public class EndToEndFlow extends BaseTest {
 
     @Test
     public void endToEndFlow() {
-        // ============================
-        // Step 1️⃣: Generate Auth Token
-        // ============================
-        CreateTokenPojo tokenBody = new CreateTokenPojo();
-        tokenBody.setUsername("admin");
-        tokenBody.setPassword("password123");
 
-        Response tokenResponse = given()
-                .spec(BaseApi.getRequestSpec())
-                .baseUri(baseUrl)
-                .body(tokenBody)
-                .when()
-                .post(createTokenApi.getEndPoint())
-                .then()
-                .statusCode(200)
-                .log().body()
-                .extract().response();
+        // Step 1️⃣: Use existing token from BaseTest
+        String tokenValue = token;
+        System.out.println("✅ Using existing token from BaseTest: " + tokenValue);
 
-        String token = tokenResponse.jsonPath().getString("token");
-        Assert.assertNotNull(token, "❌ Token should not be null!");
-        System.out.println("✅ Token created successfully: " + token);
-
-        // ============================
-        // Step 2️⃣: Create a Booking
-        // ============================
+        // Step 2️⃣: Create a booking
         BookingPojo booking = new BookingPojo(
                 "Mahmoud",
                 "Mesalem",
@@ -55,11 +30,10 @@ public class EndToEndFlow {
         );
 
         Response createBookingResponse = given()
-                .contentType(ContentType.JSON)
-                .baseUri(baseUrl)
+                .spec(requestSpec)
                 .body(booking)
                 .when()
-                .post("/booking")
+                .post(BookingApi.CREATE_BOOKING)
                 .then()
                 .statusCode(200)
                 .log().body()
@@ -69,15 +43,12 @@ public class EndToEndFlow {
         Assert.assertTrue(bookingId > 0, "❌ Booking ID should be valid!");
         System.out.println("✅ Booking created successfully. ID = " + bookingId);
 
-        // ============================
-        // Step 3️⃣: Update the Booking
-        // ============================
+        // Step 3️⃣: Update the booking
         booking.setAdditionalneeds("Lunch");
 
         Response updateResponse = given()
-                .contentType(ContentType.JSON)
-                .cookie("token", token)
-                .baseUri(baseUrl)
+                .spec(requestSpec)
+                .cookie("token", tokenValue)
                 .body(booking)
                 .when()
                 .put("/booking/" + bookingId)
@@ -90,11 +61,9 @@ public class EndToEndFlow {
         Assert.assertEquals(updatedNeed, "Lunch", "❌ Additional needs not updated!");
         System.out.println("✅ Booking updated successfully.");
 
-        // ============================
-        // Step 4️⃣: Get the Updated Booking
-        // ============================
+        // Step 4️⃣: Get updated booking
         Response getResponse = given()
-                .baseUri(baseUrl)
+                .spec(requestSpec)
                 .when()
                 .get("/booking/" + bookingId)
                 .then()
@@ -104,15 +73,13 @@ public class EndToEndFlow {
 
         BookingPojo fetchedBooking = getResponse.as(BookingPojo.class);
         Assert.assertEquals(fetchedBooking.getAdditionalneeds(), "Lunch", "❌ Data mismatch after update!");
-        System.out.println("✅ Booking retrieved successfully and verified.");
+        System.out.println("✅ Booking retrieved and verified successfully.");
 
-        // ============================
-        // Step 5️⃣: Get All Booking IDs
-        // ============================
+        // Step 5️⃣: Get all booking IDs
         Response allIdsResponse = given()
-                .baseUri(baseUrl)
+                .spec(requestSpec)
                 .when()
-                .get("/booking")
+                .get(BookingApi.GET_ALL_BOOKINGS)
                 .then()
                 .statusCode(200)
                 .extract().response();

@@ -5,7 +5,7 @@ import io.restassured.specification.RequestSpecification;
 
 public class BaseApi {
 
-    private static final String BASE_URL = "https://restful-booker.herokuapp.com";
+    public static final String BASE_URL = "https://restful-booker.herokuapp.com";
 
     public static RequestSpecification getRequestSpec() {
         return new RequestSpecBuilder()

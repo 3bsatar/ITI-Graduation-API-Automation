@@ -11,6 +11,8 @@ import java.util.Random;
 public class AddBookingTest extends BaseTest {
 
     public static int bookingId;
+    public static String createdFirstName;  // لتخزين firstname
+    public static String createdLastName;   // لتخزين lastname
 
     @Test
     public void testAddBooking() {
@@ -38,6 +40,10 @@ public class AddBookingTest extends BaseTest {
         Assert.assertEquals(response.jsonPath().getString("booking.lastname"), lastname);
 
         bookingId = response.jsonPath().getInt("bookingid");
-        System.out.println("✅ Created Booking ID: " + bookingId);
+        createdFirstName = firstname;  // حفظ firstname
+        createdLastName = lastname;    // حفظ lastname
+
+        System.out.println("Created Booking ID: " + bookingId);
+        System.out.println("Created Booking First Name: " + createdFirstName);
     }
 }
