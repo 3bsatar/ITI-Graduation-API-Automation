@@ -44,7 +44,9 @@
   │       │       ├── AddAndUpdate.java
   │       │       ├── AddBookingTest.java
   │       │       ├── BaseTest.java
+  │       │       ├── DeleteBookingTest.java
   │       │       ├── EndToEndFlow.java
+  │       │       ├── GetBookingTest.java
   │       │       └── UpdateBookingTest.java
   │
   ├── pom.xml                        # Maven dependencies
@@ -74,9 +76,10 @@ password = "password123"
 |---------------------|-----------------------------------|
 | AddBookingTest.java  | Validate creating a new booking   |
 | UpdateBookingTest.java | Validate updating existing booking |
-| EndToEndFlow.java    | Complete flow: Create → Update → Get |
-| CreateToken.java     | Generate authentication token      |
-| GetAllIds.java       | Retrieve all booking IDs           |
+| AddAndUpdate.java | Validate creating a booking then updating it in a single flow |
+| EndToEndFlow.java    | Complete flow: Create → Update → Get → List |
+| GetBookingTest.java     | Validate retrieving a single booking by ID      |
+| DeleteBookingTest.java       | Validate deleting an existing booking           |
 
 
 
